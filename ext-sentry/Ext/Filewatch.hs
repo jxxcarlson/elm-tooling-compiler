@@ -35,7 +35,7 @@ watch root action =
                 Added f _ _ -> f
                 Modified f _ _ -> f
                 Removed f _ _ -> f
-                Unknown f _ _ -> f
+                Unknown f _ _ _ -> f
 
           shouldRefresh = do
                 not (List.isInfixOf ".git" f)
