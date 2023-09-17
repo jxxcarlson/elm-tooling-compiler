@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 set -ex                                                   # Be verbose and exit immediately on error instead of trying to continue
 
-# Add the directory containing llvm-config and opt to your PATH
-export PATH="/opt/homebrew/opt/llvm@13/bin:$PATH"
-
 buildTag="elm-0.19.1-macos-arm64"
 
-ghcup install ghc 9.0.2 --set
-ghcup install cabal 3.6.2.0 --set
+export PATH="/opt/homebrew/opt/llvm@13/bin:$PATH"
+
+ghcup install ghc 9.4.5 --set
+ghcup install cabal 3.6 --set
 
 opt --version                                             # The arm64 build currently requires llvm until we get to GHC 9.4+
 
@@ -17,7 +16,6 @@ cd "$scriptDir/.."                                        # Move into the projec
 
 ffiLibs="$(xcrun --show-sdk-path)/usr/include/ffi"        # Workaround for GHC9.0.2 bug until we can use GHC9.2.3+
 export C_INCLUDE_PATH=$ffiLibs                            # https://gitlab.haskell.org/ghc/ghc/-/issues/20592#note_436353
-
 
 cabal update
 cabal build -j4                                           # Build with concurrency 4
