@@ -189,12 +189,6 @@ splitHelp str start offsets =
       unsafeSlice str start offset : splitHelp str (offset + 1) offsets
 
 
-
-
-
-
-
-
 findDividers :: Word8# -> ByteArray# -> Int# -> Int# -> [Int] -> [Int]
 findDividers divider# ba# !offset# len# revOffsets =
   if isTrue# (offset# <# len#)
@@ -216,7 +210,6 @@ unsafeSlice str start end =
     do  mba <- newByteArray len
         copy str start mba 0 len
         freeze mba
-
 
 
 -- JOIN
@@ -249,7 +242,6 @@ joinHelp sep mba offset str strings =
             writeWord8 mba dotOffset sep
             let !newOffset = dotOffset + 1
             joinHelp sep mba newOffset s ss
-
 
 
 -- EQUAL
